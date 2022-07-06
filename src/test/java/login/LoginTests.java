@@ -31,7 +31,7 @@ class LoginTests {
 
     LoginPage loginPage;
 
-    Credentials credentials;
+    Credentials credentials = new Credentials ();
 
 
 
@@ -65,7 +65,7 @@ class LoginTests {
 
         // Then
         Serenity.reportThat("Passing invalid credentials generates error message",
-                            () -> assertThat(false));
+                            () -> assertThat(mainPage.mainLogo));
     }
 
 }
