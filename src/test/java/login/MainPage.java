@@ -11,7 +11,10 @@ public class MainPage extends PageObject {
     WebElementFacade mainLogo;
 
     @Step("Heading of Main Page")
-    public boolean getUrl() {
+    public boolean getLogo() {
+
+        System.out.println ( mainLogo.isPresent () );
+
         return mainLogo.isPresent ();
 
 

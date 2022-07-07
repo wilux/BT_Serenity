@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import net.serenitybdd.screenplay.actions.Switch;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 class LoginTest {
@@ -35,8 +36,10 @@ class LoginTest {
 
 
 
+
+
     @Test
-    @Title("Login to application with valid credentials navigates to DashBoard page")
+    @Title("Login to application with valid credentials navigates to BT Main page")
 
     void successfulLogin() {
 
@@ -46,10 +49,12 @@ class LoginTest {
         loginPage.inputUserName(credentials.username);
         loginPage.inputPassword(credentials.password);
         loginPage.clickLogin();
+        loginPage.switchToNewMainWindows ();
+
 
         // Then
         Serenity.reportThat("Passing valid credentials navigates to Main page",
-                            () -> assertThat(mainPage.mainLogo));
+                            () -> assertThat(mainPage.getLogo ()));
     }
 
     @Test
@@ -65,7 +70,8 @@ class LoginTest {
 
         // Then
         Serenity.reportThat("Passing invalid credentials generates error message",
-                            () -> assertThat(mainPage.mainLogo));
+                            () -> assertThat(loginPage.loginPageErrorMessage()).isEqualTo ( " Error de inicio de " +
+                                                                                                   "sesión: nombre de usuario desconocido o contraseña incorrecta." ));
     }
 
 }
